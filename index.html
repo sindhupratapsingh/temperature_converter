@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles.css' %} ">
+   
+</head>
+<body>
+    
+<main>
+    <section>
+        
+    <div class="container">
+        <h2>Temperature Converter</h2>
+        <input type="text" id="temperatureInput" placeholder="Enter temperature" />
+        <select id="unitSelect">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+            <option value="kelvin">Kelvin</option>
+        </select>
+        <button onclick="convertTemperature()">Convert</button>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            var temperature = parseFloat(document.getElementById("temperatureInput").value);
+            var unit = document.getElementById("unitSelect").value;
+            var result = document.getElementById("result");
+
+            if (isNaN(temperature)) {
+                result.innerHTML = "Invalid input. Please enter a valid number.";
+                return;
+            }
+
+            if (unit === "celsius") {
+                var fahrenheit = (temperature * 9 / 5) + 32;
+                var kelvin = temperature + 273.15;
+
+                result.innerHTML = temperature + "°C is equal to " + fahrenheit.toFixed(2) + "°F and " + kelvin.toFixed(2) + " K.";
+            } else if (unit === "fahrenheit") {
+                var celsius = (temperature - 32) * 5 / 9;
+                var kelvin = (temperature - 32) * 5 / 9 + 273.15;
+
+                result.innerHTML = temperature + "°F is equal to " + celsius.toFixed(2) + "°C and " + kelvin.toFixed(2) + " K.";
+            } else if (unit === "kelvin") {
+                var celsius = temperature - 273.15;
+                var fahrenheit = (temperature - 273.15) * 9 / 5 + 32;
+
+                result.innerHTML = temperature + " K is equal to " + celsius.toFixed(2) + "°C and " + fahrenheit.toFixed(2) + "°F.";
+            }
+        }
+    </script>
+    </section>
+</main>
+</body>
+</html>
+
+
+
